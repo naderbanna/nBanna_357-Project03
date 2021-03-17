@@ -11,6 +11,12 @@
 		88D1960025FFF971002F0323 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D195FF25FFF971002F0323 /* ContentView.swift */; };
 		88D1960225FFF974002F0323 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D1960125FFF974002F0323 /* Assets.xcassets */; };
 		88D1960525FFF974002F0323 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88D1960425FFF974002F0323 /* Preview Assets.xcassets */; };
+		88D1960E2600062D002F0323 /* storageHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1960D2600062D002F0323 /* storageHandler.swift */; };
+		88D1961126000672002F0323 /* detailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1961026000672002F0323 /* detailView.swift */; };
+		88D1961426001E6D002F0323 /* viewAllPasswords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1961326001E6D002F0323 /* viewAllPasswords.swift */; };
+		88D196172600208B002F0323 /* viewSinglePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D196162600208B002F0323 /* viewSinglePassword.swift */; };
+		88D1961A26002295002F0323 /* addPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1961926002295002F0323 /* addPassword.swift */; };
+		88D1961D260022C7002F0323 /* deletePassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88D1961C260022C7002F0323 /* deletePassword.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +26,12 @@
 		88D1960125FFF974002F0323 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		88D1960425FFF974002F0323 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		88D1960625FFF974002F0323 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		88D1960D2600062D002F0323 /* storageHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = storageHandler.swift; sourceTree = "<group>"; };
+		88D1961026000672002F0323 /* detailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = detailView.swift; sourceTree = "<group>"; };
+		88D1961326001E6D002F0323 /* viewAllPasswords.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewAllPasswords.swift; sourceTree = "<group>"; };
+		88D196162600208B002F0323 /* viewSinglePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = viewSinglePassword.swift; sourceTree = "<group>"; };
+		88D1961926002295002F0323 /* addPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addPassword.swift; sourceTree = "<group>"; };
+		88D1961C260022C7002F0323 /* deletePassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deletePassword.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +66,12 @@
 			children = (
 				88D195FD25FFF971002F0323 /* nBanna_Project03App.swift */,
 				88D195FF25FFF971002F0323 /* ContentView.swift */,
+				88D1961926002295002F0323 /* addPassword.swift */,
+				88D1961C260022C7002F0323 /* deletePassword.swift */,
+				88D196162600208B002F0323 /* viewSinglePassword.swift */,
+				88D1961326001E6D002F0323 /* viewAllPasswords.swift */,
+				88D1961026000672002F0323 /* detailView.swift */,
+				88D1960D2600062D002F0323 /* storageHandler.swift */,
 				88D1960125FFF974002F0323 /* Assets.xcassets */,
 				88D1960625FFF974002F0323 /* Info.plist */,
 				88D1960325FFF974002F0323 /* Preview Content */,
@@ -138,8 +156,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				88D1961A26002295002F0323 /* addPassword.swift in Sources */,
 				88D1960025FFF971002F0323 /* ContentView.swift in Sources */,
+				88D196172600208B002F0323 /* viewSinglePassword.swift in Sources */,
+				88D1961426001E6D002F0323 /* viewAllPasswords.swift in Sources */,
+				88D1961126000672002F0323 /* detailView.swift in Sources */,
+				88D1961D260022C7002F0323 /* deletePassword.swift in Sources */,
 				88D195FE25FFF971002F0323 /* nBanna_Project03App.swift in Sources */,
+				88D1960E2600062D002F0323 /* storageHandler.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
