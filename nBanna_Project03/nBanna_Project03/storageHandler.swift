@@ -9,17 +9,17 @@ import Foundation
 
 struct storageHandler {
     static var defaultStorage: UserDefaults = UserDefaults.standard
-    static let defaultKey = "BasicStringStorage"
+    static let defaultDict: String = "BasicStringStorage"
     
-    static func setStoraage(input: [String]){
-        defaultStorage.set(input, forKey: self.defaultKey)
+    static func setStorage(object: [String: String]){
+        defaultStorage.set(object, forKey: self.defaultDict)
     }
     
-    static func getStorage() -> [String]{
-        if let storedWords = defaultStorage.stringArray(forKey: self.defaultKey){
+    static func getStorage() -> [String: String]{
+        if let storedWords = defaultStorage.object(forKey: self.defaultDict){
             return storedWords
         }else{
-            return []
+            return [:]
         }
     }
 }
