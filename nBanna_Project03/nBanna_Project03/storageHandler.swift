@@ -9,15 +9,16 @@ import Foundation
 
 struct storageHandler {
     static var defaultStorage: UserDefaults = UserDefaults.standard
-    static let defaultDict: String = "BasicStringStorage"
+    static let defaultDict: String = "BasicDictStorage"
+    static let storedDict: [String: String] = ["website": "password"]
     
     static func setStorage(object: [String: String]){
         defaultStorage.set(object, forKey: self.defaultDict)
     }
     
     static func getStorage() -> [String: String]{
-        if let storedWords = defaultStorage.object(forKey: self.defaultDict){
-            return storedWords
+        if let storedDict = defaultStorage.object(forKey: self.defaultDict) as? [String: String]{
+            return storedDict
         }else{
             return [:]
         }

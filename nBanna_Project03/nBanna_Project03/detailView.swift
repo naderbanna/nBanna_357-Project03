@@ -8,8 +8,33 @@
 import SwiftUI
 
 struct detailView: View {
+    @EnvironmentObject var user: User
+
+    
+    static func getPass() -> String{
+        
+        
+    }
+    
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        
+        ForEach(user.database.sorted(by: { $0.0 < $1.0 }), id: \.self.key){
+            key, value in
+            Button(
+                action: {user.showingDetail.toggle()},
+                   label: {
+                    Text(value)
+                    .frame(maxWidth: .infinity, alignment: .leading)
+            })
+                .sheet(isPresented: $user.showingDetail){
+                    //detailView()
+                }
+        }
+        
+        
+        
     }
 }
 

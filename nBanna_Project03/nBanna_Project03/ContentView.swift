@@ -11,13 +11,30 @@ class User: ObservableObject{
     @Published var database: [String: String] = storageHandler.getStorage()
     @Published var key: String = ""
     @Published var value: String = ""
+    @Published var keySelected: String = ""
     @Published var showingDetail = false
-
-    func delete(at offsets: IndexSet){
-        database.remove(atOffsets: offsets)
-        storageHandler.setStorage(input: database)
+    
+    func delete(at offset: IndexSet){
+        let dKey = Array(database.keys)[offset.first!]
+        self.database.removeValue(forKey: dKey)
+        storageHandler.setStorage(object: database)
     }
 
+}
+
+struct Encrypt{
+    static func translate(l: Character, trans: Int) -> Character{
+        if let ascii = l.asciiValue{
+            var outputInt = Int(ascii)
+            if ascii >= 97 && ascii <= 122{
+                outputInt = abs((Int(ascii)-97+trans)%26)+97
+            }else if (ascii >= 65 && ascii <= 90){
+                outputInt = abs((Int(ascii)-65+trans)%26)+65
+            }
+            return Character(UnicodeScalar(outputInt)!)
+        }
+        return Character("")
+}
 }
 
 struct ViewAllPass: View {
@@ -25,19 +42,30 @@ struct ViewAllPass: View {
     
     var body: some View{
         List{
-            ForEach(self.user.database, id: \.self){
-                item in
+
+            ForEach(user.database.sorted(by: { $0.0 < $1.0 }), id: \.self.key){
+                key, value in
                 Button(
                     action: {user.showingDetail.toggle()},
-                    label: {
-                        Text(item)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                       label: {
+                        
+                        HStack{
+                            Text(key)
+//                            let encryptVal = self.user.value
+//                            let strShft = 26-encryptVal.count
+//                            var newValue = ""
+//
+//                            for c in encryptVal{
+//                                newValue += String(Encrypt.translate(l: c, trans: strShft))
+//                           }
+                            Text(value)
+                                .padding()
+                        }
+                        
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 })
-                    .sheet(isPresented: $user.showingDetail){
-                        detailView()
-                }
+                    
             }
-            
         }
     }
 
@@ -48,36 +76,45 @@ struct DeletePass: View{
     
     var body: some View{
         List{
-            ForEach(self.user.database, id: \.self){
-                item in
+            ForEach(user.database.sorted(by: { $0.0 < $1.0 }), id: \.self.key){
+                key, value in
                 Button(
                     action: {user.showingDetail.toggle()},
-                    label: {
-                        Text(item)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                       label: {
+                        Text(key)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 })
                     .sheet(isPresented: $user.showingDetail){
                         detailView()
                     }
-                }
-                .onDelete(perform: user.delete)
+            }
+            .onDelete(perform: user.delete)
             }
         }
     }
 
 struct AddPass: View{
     @EnvironmentObject var user: User
-    
+
     var body: some View{
         TextField("Enter password name", text: $user.key)
             .padding()
         TextField("Enter the password", text: $user.value)
+            .padding()
         Button(
             action: {
-                if self.user.key != ""{
-                    user.database[user.key] = user.value
-                    storageHandler.setStorage(input: user.database)
+                if self.user.key != "" && self.user.value != ""{
+                    let encryptVal = self.user.value
+                    let strShft = encryptVal.count
+                    var newValue = ""
+                    
+                    for c in encryptVal{
+                        newValue += String(Encrypt.translate(l: c, trans: strShft))
+                    }
+                    user.database[user.key] = newValue
+                    storageHandler.setStorage(object: user.database)
                     self.user.key = ""
+                    self.user.value = ""
                 }
             },
             label: {
@@ -97,29 +134,46 @@ struct ViewPass: View{
     var body: some View{
         Text("Click on account to view Password")
         List{
-            ForEach(self.user.database, id: \.self){
-                item in
+            ForEach(user.database.sorted(by: { $0.0 < $1.0 }), id: \.self.key){
+                key, value in
                 Button(
-                    action: {user.showingDetail.toggle()},
-                    label: {
-                        Text(item)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                    action: {user.showingDetail.toggle(); user.keySelected = key},
+                       label: {
+                        Text(key)
+                        .frame(maxWidth: .infinity, alignment: .leading)
                 })
                     .sheet(isPresented: $user.showingDetail){
                         detailView()
-                }
+                    }
             }
         }
     }
 }
 
-struct PassDetail: View{
+
+struct detailView: View{
     @EnvironmentObject var user: User
     
+
+    
     var body: some View{
+  
+        ForEach(user.database.sorted(by: { $0.0 < $1.0 }), id: \.self.key){
+            key, value in
+           if(user.keySelected == key){
+//                let encryptVal = self.user.value
+//                let strShft = 26-encryptVal.count
+//                var newValue = ""
+//
+//                for c in encryptVal{
+//                    newValue += String(Encrypt.translate(l: c, trans: strShft))
+//                }
+                
+                Text(value)
+            }
+            }
         
     }
-    
 }
 
 
